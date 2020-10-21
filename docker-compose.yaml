@@ -27,7 +27,7 @@ services:
     ports:
     - "80:80"
     - "443:443"
-    - "8124:8124" # external port to expose HA
+    - "${HOMEASSISTANT_EXTERNAL_PORT}:${HOMEASSISTANT_EXTERNAL_PORT}"
     environment:
     - "HOMEASSISTANT_LOCAL_URL=${HOMEASSISTANT_LOCAL_URL}"
     - "HOMEASSISTANT_EXTERNAL_URL=${HOMEASSISTANT_EXTERNAL_URL}"
