@@ -8,7 +8,7 @@ This is a docker compose to create an Home Assistant stack with:
 
 ## Installation steps
 
-First create an `.env` file under main directory with this content
+First, rename `.env.dist` file as `.env` under main directory and edit its content. E.g.:
 
 ```bash
 HOMEASSISTANT_CONFIGDIR=<Home Assistant Config Directory>
