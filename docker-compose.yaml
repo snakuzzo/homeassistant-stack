@@ -30,6 +30,7 @@ services:
     - "8124:8124" # external port to expose HA
     environment:
     - "HOMEASSISTANT_LOCAL_URL=${HOMEASSISTANT_LOCAL_URL}"
+    - "HOMEASSISTANT_EXTERNAL_URL=${HOMEASSISTANT_EXTERNAL_URL}"
     volumes:
     - "$PWD/config/Caddyfile:/etc/caddy/Caddyfile"
     - "$PWD/data:/data"

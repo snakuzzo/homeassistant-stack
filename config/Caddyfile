@@ -12,7 +12,7 @@
   }
 }
 
-https://example.duckdns.org:8124 { 
+{$HOMEASSISTANT_EXTERNAL_URL} { 
   import https_header
   reverse_proxy {$HOMEASSISTANT_LOCAL_URL}
   log {
