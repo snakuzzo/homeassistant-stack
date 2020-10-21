@@ -2,9 +2,9 @@
 
 This is a docker compose to create an Home Assistant stack with:
 
-Home Assistant Core
-DuckDNS (to renew IP-DDNS)
-Caddy Server (to autorenew certificates)
+- Home Assistant Core
+- DuckDNS (to renew IP-DDNS)
+- Caddy Server (to autorenew certificates)
 
 ## Installation steps
 
