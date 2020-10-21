@@ -12,6 +12,7 @@ First, rename `.env.dist` file as `.env` under main directory and edit its conte
 
 ```bash
 HOMEASSISTANT_CONFIGDIR=<Home Assistant Config Directory>
+HOMEASSISTANT_LOCAL_URL=<Home Assistant Local URL>
 DUCKDNS_SUBDOMAIN=<duckdns.org subdomain>
 DUCKDNS_TOKEN=<duckdns.org token>
 ```
