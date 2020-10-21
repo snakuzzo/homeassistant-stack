@@ -25,8 +25,7 @@ services:
     container_name: caddy
     restart: unless-stopped
     ports:
-    - "80:80"
-    - "443:443"
+    - "80:80"    # Needed for HTTP-01 challenge (https://letsencrypt.org/docs/challenge-types/#http-01-challenge)
     - "${HOMEASSISTANT_EXTERNAL_PORT}:${HOMEASSISTANT_EXTERNAL_PORT}"
     environment:
     - "HOMEASSISTANT_LOCAL_URL=${HOMEASSISTANT_LOCAL_URL}"
