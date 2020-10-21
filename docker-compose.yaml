@@ -1,0 +1,34 @@
+version: '3'
+services:
+  homeassistant:
+    container_name: home-assistant
+    image: homeassistant/home-assistant:latest
+    privileged: true
+    command: [ "python", "-m", "homeassistant", "--config", "/config", "--log-rotate-days", '3' ]
+    ports:
+    - "8123:8123"
+    volumes:
+    - "${HOMEASSISTANT_CONFIGDIR}:/config"
+    environment:
+    - "TZ=Europe/Rome"
+    restart: always
+  duckdns:
+    image: linuxserver/duckdns
+    container_name: duckdns
+    environment:
+    - "TZ=Europe/Rome"
+    - "SUBDOMAINS=${DUCKDNS_SUBDOMAIN}"
+    - "TOKEN=${DUCKDNS_TOKEN}"
+    restart: unless-stopped
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+    - "80:80"
+    - "443:443"
+    - "8124:8124" # external port to expose HA
+    volumes:
+    - "$PWD/config/Caddyfile:/etc/caddy/Caddyfile"
+    - "$PWD/data:/data"
+    - "$PWD/config:/config"

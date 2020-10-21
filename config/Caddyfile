@@ -1,0 +1,25 @@
+#{
+#    acme_ca https://acme-staging-v02.api.letsencrypt.org/directory  # Uncomment this to use AMCE staging server. Comment when your config is ok
+#}
+
+(https_header) {
+  header {
+    Strict-Transport-Security "max-age=31536000; includeSubdomains"
+    X-XSS-Protection "1; mode=block"
+    X-Content-Type-Options "nosniff"
+    X-Frame-Options "SAMEORIGIN"
+    Referrer-Policy "same-origin"
+  }
+}
+
+https://example.duckdns.org:8124 { 
+  import https_header
+  reverse_proxy http://192.168.1.2:8123 # Here put Server LAN IP where HA is running
+  log {
+    output file /var/log/caddy/ha.log {
+      roll_size     5MiB
+      roll_keep     2
+      roll_keep_for 48h
+    }
+  }
+}
