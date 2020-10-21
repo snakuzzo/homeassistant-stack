@@ -8,7 +8,7 @@ This is a docker compose to create an Home Assistant stack with:
 
 ## Installation steps
 
-First, make a copy of `.env.dist` file as `.env` under main directory and edit its content. E.g.:
+Make a copy of `.env.dist` file as `.env` under main directory and edit its content. E.g.:
 
 ```bash
 HOMEASSISTANT_CONFIGDIR=<Home Assistant Config Directory>
@@ -20,20 +20,6 @@ DUCKDNS_SUBDOMAIN=example # if your DDNS is example.duckddns.org
 DUCKDNS_TOKEN=<duckdns.org token>
 ```
 
-### ./config/Caddyfile
-
-set your external port
-
-set your HA Server LAN IP and port
-
-### ./docker-compose.yaml
-
-set external port to expose Caddy
-
-### router
-
-Don't forget to portforward TCP ports 80 and HA external port to certificates autorenew
-
 ## Running stack
 
 Run in foreground with...
@@ -43,3 +29,7 @@ Run in foreground with...
 Run in background with...
 
 `docker-compose up -d`
+
+## Warning
+
+Don't forget to portforward TCP ports 80 (to allow certificates autorenew) and HA external port
