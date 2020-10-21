@@ -35,3 +35,4 @@ services:
     - "$PWD/config/Caddyfile:/etc/caddy/Caddyfile"
     - "$PWD/data:/data"
     - "$PWD/config:/config"
+
