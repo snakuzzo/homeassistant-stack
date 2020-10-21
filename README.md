@@ -16,7 +16,7 @@ DUCKDNS_SUBDOMAIN=<duckdns.org subdomain>
 DUCKDNS_TOKEN=<duckdns.org token>
 ```
 
-## ./config/Caddyfile
+### ./config/Caddyfile
 
 set your external port
 
@@ -30,7 +30,7 @@ set external port to expose Caddy
 
 Don't forget to portforward TCP ports 80 and HA external port to certificates autorenew
 
-### Running stack
+## Running stack
 
 Run in foreground with...
 
