@@ -6,7 +6,7 @@ services:
     privileged: true
     command: [ "python", "-m", "homeassistant", "--config", "/config", "--log-rotate-days", '3' ]
     ports:
-    - "8123:8123"
+    - "${HOMEASSISTANT_LOCAL_PORT}:${HOMEASSISTANT_LOCAL_PORT}"
     volumes:
     - "${HOMEASSISTANT_CONFIGDIR}:/config"
     environment:
@@ -27,8 +27,12 @@ services:
     ports:
     - "80:80"
     - "443:443"
-    - "8124:8124" # external port to expose HA
+    - "${HOMEASSISTANT_EXTERNAL_PORT}:${HOMEASSISTANT_EXTERNAL_PORT}"
+    environment:
+    - "HOMEASSISTANT_LOCAL_URL=${HOMEASSISTANT_LOCAL_URL}"
+    - "HOMEASSISTANT_EXTERNAL_URL=${HOMEASSISTANT_EXTERNAL_URL}"
     volumes:
     - "$PWD/config/Caddyfile:/etc/caddy/Caddyfile"
     - "$PWD/data:/data"
     - "$PWD/config:/config"
+

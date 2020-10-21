@@ -12,9 +12,9 @@
   }
 }
 
-https://example.duckdns.org:8124 { 
+{$HOMEASSISTANT_EXTERNAL_URL} { 
   import https_header
-  reverse_proxy http://192.168.1.2:8123 # Here put Server LAN IP where HA is running
+  reverse_proxy {$HOMEASSISTANT_LOCAL_URL}
   log {
     output file /var/log/caddy/ha.log {
       roll_size     5MiB
