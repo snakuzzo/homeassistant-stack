@@ -12,6 +12,18 @@ services:
     environment:
     - "TZ=Europe/Rome"
     restart: always
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto:latest
+    privileged: true
+    ports:
+    - "1883:${MOSQUITTO_PORT}"
+    volumes:
+    - "$PWD/config/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf"
+    - "$PWD/data/mosquitto/:/mosquitto/config/data/"
+    # Uncommenti following line if you want to use pwfile
+    #- "$PWD/config/mosquitto/pwfile:/mosquitto/config/pwfile"
+    restart: always
   duckdns:
     image: linuxserver/duckdns
     container_name: duckdns
@@ -34,4 +46,16 @@ services:
     - "$PWD/config/Caddyfile:/etc/caddy/Caddyfile"
     - "$PWD/data:/data"
     - "$PWD/config:/config"
-
+#  zigbee2mqtt:
+#    container_name: zigbee2mqtt
+#    image: koenkk/zigbee2mqtt
+#    volumes:
+#    - "$PWD/data:/data"
+#    #- "$PWD/run/udev:/run/udev:ro"
+#    devices:
+#    - "/dev/ttyACM0:/dev/ttyACM0"
+#    restart: on-failure:100
+#    network_mode: host
+#    privileged: true
+#    environment:
+#    - "TZ=Europe/Rome"
