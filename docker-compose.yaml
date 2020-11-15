@@ -40,7 +40,7 @@ services:
     - "HOMEASSISTANT_LOCAL_URL=${HOMEASSISTANT_LOCAL_URL}"
     - "HOMEASSISTANT_EXTERNAL_URL=${HOMEASSISTANT_EXTERNAL_URL}"
     volumes:
-    - "$PWD/config/Caddyfile:/etc/caddy/Caddyfile"
+    - "$PWD/config/caddy/Caddyfile:/etc/caddy/Caddyfile"
     #- "$PWD/data:/data"
     #- "$PWD/config:/config"
   zigbee2mqtt:

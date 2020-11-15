@@ -1,0 +1,17 @@
+homeassistant: true
+permit_join: false
+mqtt:
+  base_topic: zigbee2mqtt
+  server: 'mqtt://192.168.1.10'
+  #user: myuser
+  #password: mypassword
+serial:
+  port: /dev/ttyUSB0
+advanced:
+  homeassistant_discovery_topic: homeassistant
+  channel: 25
+experimental:
+  new_api: true
+frontend:
+  port: 8080
+devices: {}
