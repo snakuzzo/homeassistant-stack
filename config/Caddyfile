@@ -1,6 +1,9 @@
-#{
-#    acme_ca https://acme-staging-v02.api.letsencrypt.org/directory  # Uncomment this to use AMCE staging server. Comment when your config is ok
-#}
+#  When your config is ok comment block below to disable use of AMCE staging server
+{
+    acme_ca https://acme-staging-v02.api.letsencrypt.org/directory 
+}
+
+###############
 
 (https_header) {
   header {
