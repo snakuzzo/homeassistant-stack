@@ -1,5 +1,4 @@
 .vscode
 .env
 data/*
-config/caddy/*
 config/mosquitto/pwfile
