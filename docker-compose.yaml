@@ -17,12 +17,9 @@ services:
     image: eclipse-mosquitto:latest
     privileged: true
     ports:
-    - "1883:${MOSQUITTO_PORT}"
+    - "${MOSQUITTO_PORT}:${MOSQUITTO_PORT}"
     volumes:
-    - "$PWD/config/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf"
-    - "$PWD/data/mosquitto/:/mosquitto/config/data/"
-    # Uncommenti following line if you want to use pwfile
-    #- "$PWD/config/mosquitto/pwfile:/mosquitto/config/pwfile"
+    - "${MOSQUITTO_CONFIGDIR}:/mosquitto/config"
     restart: always
   duckdns:
     image: linuxserver/duckdns
@@ -44,18 +41,19 @@ services:
     - "HOMEASSISTANT_EXTERNAL_URL=${HOMEASSISTANT_EXTERNAL_URL}"
     volumes:
     - "$PWD/config/Caddyfile:/etc/caddy/Caddyfile"
-    - "$PWD/data:/data"
-    - "$PWD/config:/config"
-#  zigbee2mqtt:
-#    container_name: zigbee2mqtt
-#    image: koenkk/zigbee2mqtt
-#    volumes:
-#    - "$PWD/data:/data"
-#    #- "$PWD/run/udev:/run/udev:ro"
-#    devices:
-#    - "/dev/ttyACM0:/dev/ttyACM0"
-#    restart: on-failure:100
-#    network_mode: host
-#    privileged: true
-#    environment:
-#    - "TZ=Europe/Rome"
+    #- "$PWD/data:/data"
+    #- "$PWD/config:/config"
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    image: koenkk/zigbee2mqtt:latest
+    privileged: true
+    volumes:
+    - "${Z2M_CONFIG_DIR}:/app/data"
+    devices:
+    - "/dev/ttyUSB0:/dev/ttyUSB0"  # Check correct device address on your system
+    restart: on-failure:10
+    network_mode: host
+    ports:
+    - "${Z2M_WEB_PORT}:${Z2M_WEB_PORT}"   
+    environment:
+    - "TZ=Europe/Rome"
