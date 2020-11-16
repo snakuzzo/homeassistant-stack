@@ -1,4 +1,12 @@
 .vscode
 .env
-data/*
-config/mosquitto/pwfile
+*pwfile
+caddy/config/*
+!caddy/config/Caddyfile
+caddy/data
+caddy/log
+mosquitto/config/*
+!mosquitto/config/mosquitto.example.conf
+zigbee2mqtt/config/*
+!zigbee2mqtt/config/configuration.example.yaml
+zigbee2mqtt/log

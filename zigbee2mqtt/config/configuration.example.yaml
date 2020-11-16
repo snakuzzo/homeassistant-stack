@@ -9,7 +9,8 @@ serial:
   port: /dev/ttyUSB0
 advanced:
   homeassistant_discovery_topic: homeassistant
-  channel: 25
+  channel: 11
+  log_directory: /var/log
 experimental:
   new_api: true
 frontend:

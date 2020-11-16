@@ -15,12 +15,13 @@ services:
   mosquitto:
     container_name: mosquitto
     image: eclipse-mosquitto:latest
-    privileged: true
     ports:
     - "${MOSQUITTO_PORT}:${MOSQUITTO_PORT}"
     volumes:
-    - "${MOSQUITTO_CONFIGDIR}:/mosquitto/config"
+    - "${PWD}/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf"
     restart: always
+    environment:
+    - "TZ=Europe/Rome"
   duckdns:
     image: linuxserver/duckdns
     container_name: duckdns
@@ -39,21 +40,24 @@ services:
     environment:
     - "HOMEASSISTANT_LOCAL_URL=${HOMEASSISTANT_LOCAL_URL}"
     - "HOMEASSISTANT_EXTERNAL_URL=${HOMEASSISTANT_EXTERNAL_URL}"
+    - "TZ=Europe/Rome"
     volumes:
-    - "$PWD/config/caddy/Caddyfile:/etc/caddy/Caddyfile"
-    #- "$PWD/data:/data"
-    #- "$PWD/config:/config"
+    - "${PWD}/caddy/config/Caddyfile:/etc/caddy/Caddyfile"
+    - "${PWD}/caddy/data:/data"
+    - "${PWD}/caddy/log:/var/log/caddy"
   zigbee2mqtt:
     container_name: zigbee2mqtt
     image: koenkk/zigbee2mqtt:latest
     privileged: true
     volumes:
-    - "${Z2M_CONFIG_DIR}:/app/data"
+    - "${PWD}/zigbee2mqtt/config:/app/data"
+    - "${PWD}/zigbee2mqtt/log:/var/log/zigbee2mqtt"
+    - /run/udev:/run/udev:ro
     devices:
-    - "/dev/ttyUSB0:/dev/ttyUSB0"  # Check correct device address on your system
+    - "${Z2M_DEVICE_PORT}:${Z2M_DEVICE_PORT}"  # Check correct device address on your system
     restart: on-failure:10
     network_mode: host
     ports:
-    - "${Z2M_WEB_PORT}:${Z2M_WEB_PORT}"   
+    - "${Z2M_WEB_PORT}:${Z2M_WEB_PORT}"  
     environment:
     - "TZ=Europe/Rome"
