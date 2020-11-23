@@ -61,3 +61,17 @@ services:
     - "${Z2M_WEB_PORT}:${Z2M_WEB_PORT}"  
     environment:
     - "TZ=Europe/Rome"
+  portainer:
+    image: portainer/portainer
+    container_name: portainer
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    ports:
+    - ${PORTAINER_PORT}:${PORTAINER_PORT}
+#    - 8000:8000    # if you use EDGE Agent uncomment this line
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+      
+volumes:
+  portainer_data:

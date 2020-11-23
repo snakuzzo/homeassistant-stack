@@ -6,6 +6,8 @@ This is a docker compose to create an Home Assistant stack with:
 - DuckDNS (to renew IP-DDNS)
 - Caddy Server (to autorenew certificates)
 - Eclipse Mosquitto MQTT broker
+- Zigbee2Mqtt
+- Portainer
 
 ## Installation steps
 
@@ -27,6 +29,7 @@ DUCKDNS_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 MOSQUITTO_PORT=1883
 Z2M_WEB_PORT=8080
 Z2M_DEVICE_PORT=/dev/ttyUSB0
+PORTAINER_PORT=9000
 ```
 
 ## Running stack
