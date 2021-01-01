@@ -22,14 +22,6 @@ services:
     restart: always
     environment:
     - "TZ=Europe/Rome"
-  duckdns:
-    image: linuxserver/duckdns
-    container_name: duckdns
-    environment:
-    - "TZ=Europe/Rome"
-    - "SUBDOMAINS=${DUCKDNS_SUBDOMAIN}"
-    - "TOKEN=${DUCKDNS_TOKEN}"
-    restart: unless-stopped
   caddy:
     image: caddy:latest
     container_name: caddy

@@ -3,7 +3,6 @@
 This is a docker compose to create an Home Assistant stack with:
 
 - Home Assistant Core
-- DuckDNS (to renew IP-DDNS)
 - Caddy Server (to autorenew certificates)
 - Eclipse Mosquitto MQTT broker
 - Zigbee2Mqtt
@@ -24,8 +23,6 @@ HOMEASSISTANT_LOCAL_URL=http://192.168.1.2:8123
 HOMEASSISTANT_LOCAL_PORT=8123
 HOMEASSISTANT_EXTERNAL_URL=https://example.duckdns.org:8124
 HOMEASSISTANT_EXTERNAL_PORT=8124
-DUCKDNS_SUBDOMAIN=example # if your DDNS is example.duckddns.org
-DUCKDNS_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 MOSQUITTO_PORT=1883
 Z2M_WEB_PORT=8080
 Z2M_DEVICE_PORT=/dev/ttyUSB0
