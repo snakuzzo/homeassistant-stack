@@ -11,6 +11,7 @@ services:
     - "${HOMEASSISTANT_CONFIGDIR}:/config"
     environment:
     - "TZ=Europe/Rome"
+    network_mode: host
     restart: always
   mosquitto:
     container_name: mosquitto
@@ -19,9 +20,9 @@ services:
     - "${MOSQUITTO_PORT}:${MOSQUITTO_PORT}"
     volumes:
     - "${PWD}/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf"
-    restart: always
     environment:
     - "TZ=Europe/Rome"
+    restart: always
   caddy:
     image: caddy:latest
     container_name: caddy
