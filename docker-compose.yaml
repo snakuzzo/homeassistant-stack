@@ -5,6 +5,7 @@ services:
     image: homeassistant/home-assistant:latest
     privileged: true
     command: [ "python", "-m", "homeassistant", "--config", "/config", "--log-rotate-days", '3' ]
+    user: ${UID_GID}
     ports:
     - "${HOMEASSISTANT_LOCAL_PORT}:${HOMEASSISTANT_LOCAL_PORT}"
     volumes:
