@@ -3,11 +3,9 @@ services:
   homeassistant:
     container_name: home-assistant
     image: homeassistant/home-assistant:latest
+    #image: homeassistant/raspberrypi3-homeassistant:stable
+    #image: homeassistant/raspberrypi4-homeassistant:stable
     privileged: true
-    command: [ "python", "-m", "homeassistant", "--config", "/config", "--log-rotate-days", '3' ]
-    user: ${UID_GID}
-    ports:
-    - "${HOMEASSISTANT_LOCAL_PORT}:${HOMEASSISTANT_LOCAL_PORT}"
     volumes:
     - "${HOMEASSISTANT_CONFIGDIR}:/config"
     environment:
@@ -20,7 +18,7 @@ services:
     ports:
     - "${MOSQUITTO_PORT}:${MOSQUITTO_PORT}"
     volumes:
-    - "${PWD}/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf"
+    - "${PWD}/mosquitto/config:/mosquitto/config"
     environment:
     - "TZ=Europe/Rome"
     restart: always
@@ -29,7 +27,8 @@ services:
     container_name: caddy
     restart: unless-stopped
     ports:
-    - "80:80"    # Needed for HTTP-01 challenge (https://letsencrypt.org/docs/challenge-types/#http-01-challenge)
+    - "80:80"    # Needed for HTTP-01 challenge
+    #- "443:443"    # Needed for TLS-ALPN-01 challenge 
     - "${HOMEASSISTANT_EXTERNAL_PORT}:${HOMEASSISTANT_EXTERNAL_PORT}"
     environment:
     - "HOMEASSISTANT_LOCAL_URL=${HOMEASSISTANT_LOCAL_URL}"
@@ -51,8 +50,6 @@ services:
     - "${Z2M_DEVICE_PORT}:${Z2M_DEVICE_PORT}"  # Check correct device address on your system
     restart: on-failure:10
     network_mode: host
-    ports:
-    - "${Z2M_WEB_PORT}:${Z2M_WEB_PORT}"  
     environment:
     - "TZ=Europe/Rome"
   portainer:
@@ -62,7 +59,7 @@ services:
     restart: always
     ports:
     - ${PORTAINER_PORT}:${PORTAINER_PORT}
-#    - 8000:8000    # if you use EDGE Agent uncomment this line
+    #- 8000:8000    # if you use EDGE Agent uncomment this line
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data

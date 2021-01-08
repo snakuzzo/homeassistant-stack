@@ -24,7 +24,6 @@ HOMEASSISTANT_LOCAL_PORT=8123
 HOMEASSISTANT_EXTERNAL_URL=https://example.duckdns.org:8124
 HOMEASSISTANT_EXTERNAL_PORT=8124
 MOSQUITTO_PORT=1883
-Z2M_WEB_PORT=8080
 Z2M_DEVICE_PORT=/dev/ttyUSB0
 PORTAINER_PORT=9000
 ```
@@ -41,4 +40,4 @@ Run in background with...
 
 ## Warning
 
-Don't forget to portforward TCP ports 80 (to allow certificates autorenew) and HA external port
+Don't forget to portforward TCP ports 80 or 443 (to allow certificates autorenew) and HA external port
