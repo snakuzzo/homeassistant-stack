@@ -5,6 +5,7 @@ services:
     image: homeassistant/home-assistant:latest
     #image: homeassistant/raspberrypi3-homeassistant:stable
     #image: homeassistant/raspberrypi4-homeassistant:stable
+    command: [ "python", "-m", "homeassistant", "--config", "/config", "--log-rotate-days", '3' ] # Need to rotate home-assistant.log
     privileged: true
     volumes:
     - "${HOMEASSISTANT_CONFIGDIR}:/config"
