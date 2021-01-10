@@ -54,7 +54,7 @@ services:
     environment:
     - "TZ=Europe/Rome"
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer-ce
     container_name: portainer
     command: -H unix:///var/run/docker.sock
     restart: always
