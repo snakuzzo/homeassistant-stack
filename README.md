@@ -30,14 +30,28 @@ PORTAINER_PORT=9000
 
 ## Running stack
 
+I suggest to run containers one by one so...
+
 Run in foreground with...
 
-`docker-compose up`
+`docker-compose up <container-name>`
 
 Run in background with...
 
-`docker-compose up -d`
+`docker-compose up <container-name> -d`
 
 ## Warning
 
 Don't forget to portforward TCP ports 80 or 443 (to allow certificates autorenew) and HA external port
+
+## Running noip-renew
+
+Build image
+
+`docker build noip-renew`
+
+Run temporary container and check the output
+
+`docker-compose run --rm  noip-renew`
+
+If it's ok...schedule above docker-compose command in crontab

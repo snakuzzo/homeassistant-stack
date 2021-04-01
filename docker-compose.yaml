@@ -1,11 +1,10 @@
-version: '3'
 services:
+
   homeassistant:
     container_name: home-assistant
     image: homeassistant/home-assistant:latest
     #image: homeassistant/raspberrypi3-homeassistant:stable
     #image: homeassistant/raspberrypi4-homeassistant:stable
-    command: [ "python", "-m", "homeassistant", "--config", "/config", "--log-rotate-days", '3' ] # Need to rotate home-assistant.log
     privileged: true
     volumes:
     - "${HOMEASSISTANT_CONFIGDIR}:/config"
@@ -13,6 +12,7 @@ services:
     - "TZ=Europe/Rome"
     network_mode: host
     restart: always
+
   mosquitto:
     container_name: mosquitto
     image: eclipse-mosquitto:latest
@@ -23,7 +23,9 @@ services:
     environment:
     - "TZ=Europe/Rome"
     restart: always
+
   caddy:
+
     image: caddy:latest
     container_name: caddy
     restart: unless-stopped
@@ -39,6 +41,7 @@ services:
     - "${PWD}/caddy/config/Caddyfile:/etc/caddy/Caddyfile"
     - "${PWD}/caddy/data:/data"
     - "${PWD}/caddy/log:/var/log/caddy"
+
   zigbee2mqtt:
     container_name: zigbee2mqtt
     image: koenkk/zigbee2mqtt:latest
@@ -53,17 +56,21 @@ services:
     network_mode: host
     environment:
     - "TZ=Europe/Rome"
+
   portainer:
-    image: portainer/portainer-ce
-    container_name: portainer
-    command: -H unix:///var/run/docker.sock
+    container_name: "portainer"
+    image: portainer/portainer-ce:latest
     restart: always
+    #command: -H unix:///var/run/docker.sock
     ports:
     - ${PORTAINER_PORT}:${PORTAINER_PORT}
-    #- 8000:8000    # if you use EDGE Agent uncomment this line
+    - 8000:8000
+    environment:
+    - "admin-password:pippozzo"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-      
-volumes:
-  portainer_data:
+    - /var/run/docker.sock:/var/run/docker.sock
+
+  noip-renew:
+
+    build: https://github.com/loblab/noip-renew.git
+    command: ${NOIP_USERNAME} ${NOIP_PASSWORD} ${NOIP_DEBUG_LEVEL}
