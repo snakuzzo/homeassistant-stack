@@ -3,10 +3,11 @@
 This is a docker compose to create an Home Assistant stack with:
 
 - Home Assistant Core
-- Caddy Server (to autorenew certificates)
+- Caddy Server (Proxy Server with autorenew certificates feature)
 - Eclipse Mosquitto MQTT broker
 - Zigbee2Mqtt
 - Portainer
+- NoIP Renew (to update noip.com FQDN)
 
 ## Installation steps
 
@@ -54,4 +55,4 @@ Run temporary container and check the output
 
 `docker-compose run --rm  noip-renew`
 
-If it's ok...schedule above docker-compose command in crontab
+If it's ok...schedule docker-compose run command in crontab
